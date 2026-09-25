@@ -31,7 +31,7 @@ Each run writes `overlay.png`, `mask.png` and `report.json`. Boxes use `[x, y, w
 
 ## Example result
 
-This input is generated, not a blade photograph. The dark line and spot demonstrate software behavior only. Recreate the committed sample and outputs with `python scripts/make_demo.py`.
+The demo input is generated, not a blade photograph. The dark line and spot demonstrate software behavior only. Recreate the sample and outputs with `python scripts/make_demo.py`.
 
 ## Robot design
 
