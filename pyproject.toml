@@ -1,1 +1,16 @@
-test
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wind-blade-inspection"
+version = "0.1.0"
+description = "Reproducible visual surface-anomaly screening for a wall-climbing robot case study"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24,<3", "opencv-python-headless>=4.8,<5"]
+
+[project.scripts]
+blade-inspect = "blade_inspection.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
