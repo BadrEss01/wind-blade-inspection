@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "input_file": "synthetic_surface.png",
+  "width": 400,
+  "height": 240,
+  "parameters": {
+    "threshold": 22.0,
+    "min_area": 20,
+    "blur_kernel": 31
+  },
+  "candidate_count": 2,
+  "mask_pixels": 2702,
+  "boxes_xywh": [
+    [
+      84,
+      55,
+      63,
+      131
+    ],
+    [
+      269,
+      109,
+      23,
+      23
+    ]
+  ],
+  "interpretation": "Contrast anomalies; not classified or confirmed defects."
+}

@@ -17,6 +17,7 @@ source .venv/bin/activate
 # Windows PowerShell instead:
 # .venv\Scripts\Activate.ps1
 python -m pip install -e .
+python scripts/make_demo.py
 blade-inspect examples/synthetic_surface.png --output-dir outputs/demo
 python -m unittest discover -s tests -v
 ```
@@ -31,9 +32,38 @@ Each run writes `overlay.png`, `mask.png` and `report.json`. Boxes use `[x, y, w
 
 ## Example result
 
+![OpenCV baseline on a synthetic line and spot](examples/result/overlay.png)
+
 The demo input is generated, not a blade photograph. The dark line and spot demonstrate software behavior only. Recreate the sample and outputs with `python scripts/make_demo.py`.
 
-## Robot design
+## Trainable ML segmentation (2026 extension)
+
+A compact PyTorch U-Net complements the classical OpenCV baseline. It includes
+paired image/mask loading, group-aware split checks, augmentation, BCE + Dice loss,
+validation-based checkpoint selection, held-out evaluation and inference exports.
+No pretrained or real-blade-trained weights are bundled. Read the [model card](docs/MODEL_CARD.md).
+
+Run the complete synthetic smoke experiment from the repository root:
+
+```bash
+python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -e '.[ml]'
+python scripts/make_training_demo.py
+blade-ml train data/synthetic/manifest.csv --output outputs/ml --epochs 20 --size 64 --data-kind synthetic
+blade-ml evaluate outputs/ml/best.pt data/synthetic/manifest.csv
+blade-ml predict outputs/ml/best.pt data/synthetic/image_21.png --output outputs/ml-preview
+```
+
+For your own labeled data, use CSV columns `image,mask,split,group`; paths are relative
+to the manifest. Keep each blade/capture session within one split. Training requires
+train and val rows; final evaluation requires test rows. Masks use 0/255 pixels.
+Use `--data-kind real` only for actual photographed data. Synthetic metrics verify
+the pipeline and must not be described as field accuracy.
+
+The ML commands export checkpoints/history, pixel-level metrics, probability arrays,
+masks and overlays. The simple baseline remains available for comparison.
+
+## Robot design details
 
 The report describes two belt-driven climbing modules with passive suction cups. A guide rail presses cups onto the surface, manages their transition and detachment, and uses a tail to help balance reaction forces. A swivel couples the modules to the payload chassis to support turning.
 
