@@ -1,10 +1,10 @@
-# Climbing Robot — Research and Design
+# Blade-Climbing Robot — From Research to Prototype
 
-## Research context
+## My role and objective
 
-My undergraduate research assistant work focused on the ground robot within a cooperative wind-blade inspection system. The wider concept used a UAV to transport the robot and a deployment arm to place it on the blade.
+As an undergraduate research assistant, I worked on developing a prototype that could adhere to a wind turbine blade and move along its surface, including a mechanism for changing direction. My work ran from researching suitable climbing approaches to designing the hardware from scratch in Fusion 360, producing printed parts, assembling the prototype, and programming its components.
 
-I worked on the research behind the climbing mechanism, its Fusion 360 design, printed components, assembly, and programming. The [coauthored research report](research/wind-blade-inspection-report.pdf) documents the team's system concept and technical work.
+The immediate research objective was the climbing platform. Inspection and maintenance tools were future applications for that platform. The [coauthored report](research/wind-blade-inspection-report.pdf) explicitly places specific ground-robot inspection functions outside the original scope.
 
 ## From literature review to design
 
@@ -32,7 +32,11 @@ The report discusses suction holding force, friction, belt-drive kinematics, mot
 
 A proposed test rig uses a motor-driven plate and force sensor to investigate the relationship between suction-cup pressing force and detachment force. Varying the pressing force would help identify suitable attachment conditions. Numerical adhesion results and raw experiment logs are not available in this repository.
 
-## Prototype
+## From CAD to the physical prototype
+
+I translated the mechanism into 3D part and assembly designs in Fusion 360, then worked on 3D printing, assembly, and programming. This was the practical continuation of the adhesion and locomotion research.
+
+The guide rail was especially important: its geometry had to bring each cup into contact smoothly, apply pressing force, distribute load across attached cups, and allow release at the rear. A tail helped manage reaction forces, while the chassis and swivel connected the two climbing modules for the turning concept.
 
 The report includes Fusion 360 illustrations and a photograph of a 3D-printed guide rail. These document the design and prototype development; reliable vertical climbing, turning, and outdoor blade operation still require experimental validation.
 
@@ -40,10 +44,12 @@ The report includes Fusion 360 illustrations and a photograph of a 3D-printed gu
 
 *Illustrations from the report by Badr Essefiany, Calin Constantin Clichici, Dongwook Lee, and Wail Bougida.*
 
-## Available material and future work
+## Development status and next engineering steps
 
 The repository contains the report, design overview, and a later image-inspection extension. Original CAD files, wiring, firmware, and raw test logs are not included.
 
-A future integration could feed camera images into the inspection pipeline. Camera calibration, surface registration, adhesion monitoring, and motion control would need to be developed and tested before physical inspection trials.
+Further development of the platform would focus on measuring adhesion under different loading and surface conditions, checking the attachment and release cycle, and validating climbing and turning. The proposed pressing-force test rig provides one starting point for that work.
+
+The [later visual-inspection software](software-extension.md) is an additional function to explore once the physical platform and camera interface are ready.
 
 [Research report and reading guide](research/README.md) · [Back to project](../README.md)
