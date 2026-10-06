@@ -1,10 +1,43 @@
-# Wind-blade inspection: climbing robot and visual screening
+# Wind-Blade Inspection — Undergraduate Robotics Research
 
 [![Inspection tests](https://github.com/BadrEss01/wind-blade-inspection/actions/workflows/tests.yml/badge.svg)](https://github.com/BadrEss01/wind-blade-inspection/actions/workflows/tests.yml)
 
-A robotics design case study paired with a runnable Python/OpenCV surface-inspection extension. The original cooperative project investigated deploying a wall-climbing robot onto a wind-turbine blade. This repository brings its mechanical design context together with an image-processing tool for locating candidate surface anomalies.
+During my undergraduate research assistant work at Jacobs University Bremen, I contributed to a cooperative project with Acquahmeyer Drone Tech exploring how a UAV could deploy a climbing robot onto a wind turbine blade for contact inspection.
 
-**Two stages, one project:** the historical work covers the robot concept and prototype; the September 2026 extension processes still images. The detector has not been integrated with the robot or validated on real turbine defects.
+My focus was the ground robot. I worked on the research behind its design as well as its development in Fusion 360, 3D printing, assembly, and programming. This repository brings together the research report, the robot design, and a later surface-inspection software extension.
+
+**[Read the research report (PDF)](docs/research/wind-blade-inspection-report.pdf)** · [Research overview](docs/research/README.md) · [Robot design](docs/robot-design.md)
+
+## Undergraduate research assistant work
+
+A substantial part of my work involved investigating how a robot could attach to and move along a blade surface. Within the team, I contributed to:
+
+- **Literature review and concept comparison:** studying existing climbing robots and comparing suction, magnetic adhesion, and gripping approaches.
+- **Requirements and design trade-offs:** considering weight, center of mass, surface protection, energy use, and adaptation to changes in the climbing surface.
+- **Adhesion and locomotion research:** investigating passive suction cups and a belt-driven mechanism, including cup attachment, pressing, and release.
+- **Mechanical design and prototyping:** developing the climbing platform in Fusion 360 and working on printed components, assembly, and programming.
+- **Research documentation:** coauthoring the report, which connects the design rationale with calculations, force analysis, and a proposed suction-cup test setup.
+
+The report documents the team's combined work. Its UAV perception and deployment studies provide the wider system context; my main contribution was to the ground robot.
+
+## Research report
+
+*Wind Blade Inspection System with Unmanned Aerial Vehicle and Ground Robot*  
+**Badr Essefiany, Calin Constantin Clichici, Dongwook Lee, and Wail Bougida**  
+Project Report of Cooperative Work — Jacobs University Bremen  
+Supervision: Acquahmeyer Drone Tech and Prof. Francesco Maurelli
+
+For the climbing-robot research, start with **Section 2.1** (literature review), **Sections 3.3–3.4** (requirements, design, and assembly), and **Section 4.2** (force analysis and the proposed adhesion experiment).
+
+![Climbing robot design from the cooperative report](assets/robot-design.jpg)
+
+*Design illustrations from the coauthored report.*
+
+## Visual inspection extension
+
+In September 2026, I added a still-image inspection extension using OpenCV and a trainable PyTorch U-Net. It provides a way to explore surface screening alongside the original robot research. Development used AI coding assistance.
+
+The extension is separate from the original research implementation. Current verification uses synthetic images; the detector has not been integrated with the robot or validated on real turbine defects.
 
 ## Try it
 
@@ -57,8 +90,7 @@ blade-ml predict outputs/ml/best.pt data/synthetic/image_21.png --output outputs
 For your own labeled data, use CSV columns `image,mask,split,group`; paths are relative
 to the manifest. Keep each blade/capture session within one split. Training requires
 train and val rows; final evaluation requires test rows. Masks use 0/255 pixels.
-Use `--data-kind real` only for actual photographed data. Synthetic metrics verify
-the pipeline and must not be described as field accuracy.
+Use `--data-kind real` only for actual photographed data. Synthetic metrics measure pipeline behavior rather than field accuracy.
 
 The ML commands export checkpoints/history, pixel-level metrics, probability arrays,
 masks and overlays. The simple baseline remains available for comparison.
@@ -71,12 +103,6 @@ The assembly section specifies two 12 V, 146 RPM brushed DC motors with encoders
 
 Read the [hardware design and evidence](docs/robot-design.md), [inspection method and validation](docs/inspection.md), and [authorship and sources](docs/provenance.md).
 
-## Contribution and authorship
-
-Badr Essefiany reports work on the ground-robot design in Fusion 360, 3D-printed parts, assembly and programming. The report is coauthored with **Calin Constantin Clichici, Dongwook Lee and Wail Bougida**, supervised by **Acquahmeyer Drone Tech and Prof. Francesco Maurelli**, at Jacobs University Bremen. Its UAV experiments are team context and are not attributed solely to Badr.
-
-The image-inspection software is a new AI-assisted extension maintained by Badr, evolved from the earlier baseline in [Computer_Vision](https://github.com/BadrEss01/Computer_Vision/tree/main/projects/wall-blade-surface-defects). It is not presented as original thesis code.
-
 ## Repository layout
 
 | Location | Contents |
@@ -85,10 +111,11 @@ The image-inspection software is a new AI-assisted extension maintained by Badr,
 | `tests/` | Detector and end-to-end file-output tests |
 | `examples/` | Synthetic input, reference mask and generated outputs |
 | `scripts/make_demo.py` | Deterministic sample generator |
-| `docs/` | Robot design, source evidence and validation limits |
+| `docs/` | Robot design, inspection method, model card, and project sources |
+| `docs/research/` | Research report PDF and reading guide |
 | `.github/workflows/` | Automated tests on Python 3.10 and 3.12 |
 
-## What it can establish
+## Current limitations and next steps
 
 The executable pipeline highlights local grayscale contrast, removes small regions and exports reviewable outputs. It does not distinguish cracks from dirt, shadows or reflections, determine structural severity, control a robot or provide a safety decision. Thin cracks may disappear during morphological filtering. No field accuracy, payload capability or autonomous blade-climbing performance is claimed.
 

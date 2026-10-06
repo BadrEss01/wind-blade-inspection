@@ -2,7 +2,7 @@
 
 Primary source: **Wind Blade Inspection System with Unmanned Aerial Vehicle and Ground Robot**, *Project Report of Cooperative Work*, Badr Essefiany, Calin Constantin Clichici, Dongwook Lee, Wail Bougida. Supervisor: Acquahmeyer Drone Tech & Prof. Francesco Maurelli. Jacobs University Bremen, Department of Computer Science and Electrical Engineering.
 
-The source recovered for this repository was the user's 30-page `Thesis.pdf`, not editable LaTeX source. The historical project is associated with Badr's 2022 thesis period. The PDF title page itself has no explicit date. Printed pages begin after the title, abstract and contents.
+The primary source is the 30-page `Thesis.pdf`. A compressed reading copy is included at [docs/research/wind-blade-inspection-report.pdf](research/wind-blade-inspection-report.pdf), with a [reading guide](research/README.md). Text and page order are retained; embedded images are downsampled. Editable Overleaf/LaTeX source is not included. The historical project is associated with Badr's 2022 thesis period. The PDF title page itself has no explicit date. Printed pages begin after the title, abstract and contents.
 
 The design excerpt in `assets/robot-design.jpg` is PDF page 20 (printed p. 17), including guide-rail, payload and swivel illustrations. It is credited to the report's four authors. It is a rendered excerpt, not editable CAD.
 
